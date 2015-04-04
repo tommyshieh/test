@@ -33,6 +33,10 @@ module.exports =
       id: "using-the-scanner"
       location: "example#using-the-scanner"
     }
+    {
+      id: "map-view"
+      location: "example#map-view"
+    }
   ]
 
   # drawers:

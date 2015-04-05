@@ -103,16 +103,4 @@ angular
 
     });
 
-    
-    // create map
-    var mapOptions = {
-      zoom: 18
-    };
-
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-    var viewportHeight = $(window).height();
-    $('#map-canvas').css("height", 300);
-
-
   });

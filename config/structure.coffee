@@ -19,6 +19,11 @@ module.exports =
       id: "internet"
       location: "http://google.com" # URLs are supported!
     }
+    {
+      title: "Superheroes"
+      id: "superheroes"
+      location: "superhero#index"
+    }
   ]
 
   # rootView:

@@ -83,4 +83,36 @@ angular
     };
   	$scope.getPosition();
     $('#map-canvas').css("height", $(window).height());
+    
+    supersonic.device.geolocation.watchPosition().onValue( function(position) {
+      supersonic.logger.log(
+        "Latitude: " + position.coords.latitude + "\n" +
+        "Longitude: " + position.coords.longitude + "\n" +
+        "Timestamp: " + position.timestamp
+      );
+
+      $('#coordinates').html(
+        "Latitude: " + position.coords.latitude + "\n" +
+        "Longitude: " + position.coords.longitude + "\n" +
+        "Timestamp: " + position.timestamp
+      );
+
+      currentLocation = new google.maps.LatLng(position.coords.latitude,
+                                               position.coords.longitude);
+      map.setCenter(currentLocation);
+
+    });
+
+    
+    // create map
+    var mapOptions = {
+      zoom: 18
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+    var viewportHeight = $(window).height();
+    $('#map-canvas').css("height", 300);
+
+
   });

@@ -19,6 +19,11 @@ module.exports =
       id: "account"
       location: "example#settings"
     }
+    {
+      title: "Superheroes"
+      id: "superheroes"
+      location: "superhero#index"
+    }
   ]
 
   # rootView:

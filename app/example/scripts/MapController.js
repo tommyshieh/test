@@ -7,112 +7,103 @@ angular
 
     
 
-		function CenterControl(controlDiv, map) {
+    function CenterControl(controlDiv, map) {
 
-		  // Set CSS for the control border
-		  var controlUI = document.createElement('div');
-		  controlUI.style.backgroundColor = '#fff';
-		  controlUI.style.border = '2px solid #fff';
-		  controlUI.style.borderRadius = '3px';
-		  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-		  controlUI.style.cursor = 'pointer';
-		  controlUI.style.marginBottom = '22px';
-		  controlUI.style.marginLeft = "5px";
-		  controlUI.style.textAlign = 'center';
-		  controlUI.title = 'Click to recenter the map';
-		  controlDiv.appendChild(controlUI);
+      // Set CSS for the control border
+      var controlUI = document.createElement('div');
+      controlUI.style.backgroundColor = '#fff';
+      controlUI.style.border = '2px solid #fff';
+      controlUI.style.borderRadius = '3px';
+      controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+      controlUI.style.cursor = 'pointer';
+      controlUI.style.marginBottom = '22px';
+      controlUI.style.marginLeft = "5px";
+      controlUI.style.textAlign = 'center';
+      controlUI.title = 'Click to recenter the map';
+      controlDiv.appendChild(controlUI);
 
-		  // Set CSS for the control interior
-		  var controlText = document.createElement('img');
-		  controlText.src = "/icons/mylocation.svg";
-		  controlText.width = $(window).height()/25;
-		  controlText.height = $(window).height()/25;
-		  controlUI.appendChild(controlText);
+      // Set CSS for the control interior
+      var controlText = document.createElement('img');
+      controlText.src = "/icons/mylocation.svg";
+      controlText.width = $(window).height()/25;
+      controlText.height = $(window).height()/25;
+      controlUI.appendChild(controlText);
 
-		  // Setup the click event listeners: simply set the map to
-		  // Chicago
-		  google.maps.event.addDomListener(controlUI, 'click', function() {
-      	supersonic.device.geolocation.getPosition().then(function(position)
-	    	{
-	    		$scope.position = position;
-	    		map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
-	    	});
-		  });
-		}
+      // Setup the click event listeners: simply set the map to
+      // Chicago
+      google.maps.event.addDomListener(controlUI, 'click', function() {
+        supersonic.device.geolocation.getPosition().then(function(position)
+        {
+          $scope.position = position;
+          map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
+          map.setZoom(18);
+        });
+      });
+    }
     
-  	var map = undefined;
-		function initialize() {
+    var map = undefined;
+    var myMarker = undefined;
+    function initialize() {
       var mapOptions = {
         center: { lat: -34, lng: 150},
         zoom: 18,
         zoomControl: true,
-    		zoomControlOptions: {
-        	style: google.maps.ZoomControlStyle.LARGE,
-        	index: 1,
-        	position: google.maps.ControlPosition.LEFT_TOP
-    		},
-    		streetViewControl: true,
-    		streetViewControlOptions: {
+        zoomControlOptions: {
+          style: google.maps.ZoomControlStyle.LARGE,
+          index: 1,
+          position: google.maps.ControlPosition.LEFT_TOP
+        },
+        streetViewControl: true,
+        streetViewControlOptions: {
         position: google.maps.ControlPosition.TOP_LEFT
-    		}
-    	};
+        }
+      };
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+      // set center to current location
+      supersonic.device.geolocation.getPosition().then(function(position)
+      {
+        var currentLocation = new google.maps.LatLng(position.coords.latitude,
+                                                     position.coords.longitude);
+        map.setCenter(currentLocation);
+        var markerSize = $(window).height()/50;
+        var myMarkerImg = {
+          url: "/icons/mylocation-marker.svg",
+          size: new google.maps.Size(markerSize, markerSize),
+          scaledSize: new google.maps.Size(markerSize, markerSize)
+        }
+
+        myMarker = new google.maps.Marker({
+          position: currentLocation, 
+          map: map,
+          title: "Me",
+          icon: myMarkerImg
+          });
+      });
 
       // Create the DIV to hold the control and
-		  // call the CenterControl() constructor passing
-		  // in this DIV.
-		  var centerControlDiv = document.createElement('div');
-		  var centerControl = new CenterControl(centerControlDiv, map);
+      // call the CenterControl() constructor passing
+      // in this DIV.
+      var centerControlDiv = document.createElement('div');
+      var centerControl = new CenterControl(centerControlDiv, map);
 
-		  centerControlDiv.index = 0;
-		  map.controls[google.maps.ControlPosition.LEFT_TOP].push(centerControlDiv);
+      centerControlDiv.index = 0;
+      map.controls[google.maps.ControlPosition.LEFT_TOP].push(centerControlDiv);
     }
     
-		google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 
-
-
-		$scope.getPosition = function()
-    {
-    	supersonic.device.geolocation.getPosition().then(function(position)
-    	{
-    		$scope.position = position;
-    		map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
-    	});
-    };
-  	$scope.getPosition();
     $('#map-canvas').css("height", $(window).height());
-    
-    supersonic.device.geolocation.watchPosition().onValue( function(position) {
-      supersonic.logger.log(
-        "Latitude: " + position.coords.latitude + "\n" +
-        "Longitude: " + position.coords.longitude + "\n" +
-        "Timestamp: " + position.timestamp
-      );
 
-      $('#coordinates').html(
-        "Latitude: " + position.coords.latitude + "\n" +
-        "Longitude: " + position.coords.longitude + "\n" +
-        "Timestamp: " + position.timestamp
-      );
-
-      currentLocation = new google.maps.LatLng(position.coords.latitude,
-                                               position.coords.longitude);
-      map.setCenter(currentLocation);
-
-    });
-
-    
-    // create map
-    var mapOptions = {
-      zoom: 18
-    };
-
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-    var viewportHeight = $(window).height();
-    $('#map-canvas').css("height", 300);
-
+    setInterval(function(){
+      // set center to current location
+      supersonic.device.geolocation.getPosition().then(function(position)
+      {
+        var currentLocation = new google.maps.LatLng(position.coords.latitude,
+                                                     position.coords.longitude);
+        supersonic.logger.log(currentLocation);
+        myMarker.setPosition(currentLocation);
+      });
+    }, 1000);
 
   });

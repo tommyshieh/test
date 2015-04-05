@@ -19,6 +19,10 @@ navigation-bar button, navigation-bar back-bar-button {
   font-weight: 300;
 }
 
+navigation-bar button#add{
+  background-image: url(icons/plus.svg);
+}
+
 tab-bar {
   background-color: #ffffff;
   border-top: 1px #d8d8d8 solid;
@@ -34,14 +38,15 @@ tab-bar tab-bar-item:selected {
   color: #1596f7;
 }
 
-tab-bar-item#settings {
-  background-image: url(icons/cog.svg);
+tab-bar-item#account {
+  background-image: url(icons/user.svg);
 }
 
 tab-bar-item#index {
-  background-image: url(icons/home.svg);
+  background-image: url(icons/click.svg);
 }
 
-tab-bar-item#internet {
-  background-image: url(icons/search.svg);
+tab-bar-item#map {
+  background-image: url(icons/Globe.svg);
+  padding-bottom: 4px;
 }

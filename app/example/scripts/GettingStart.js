@@ -4,7 +4,6 @@ var app = angular.module('example');
 app.controller('get-started', function($scope, supersonic) {
     $scope.navbarTitle = "OurApp";
 	var events = [];
-	Parse.initialize("6PkS9v12fGDnNYc1dQrwQOH6l2ilnDQ3TrLtCKaN", "rcZtT4MfyGOiKkUNBApCYhY3lh3hhbw6N5Vyhzi0");
 	var Events = Parse.Object.extend("Events");
 	var query = new Parse.Query(Events);
 	query.find({

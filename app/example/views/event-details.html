@@ -1,0 +1,25 @@
+<div class="padding"  ng-controller="event-details-controller">
+
+  <super-navbar>
+    <super-navbar-title ng-bind="navbarTitle">
+      Details
+    </super-navbar-title>
+  </super-navbar>
+
+
+  <div class="events" ng-repeat="event in events">
+
+     <div class="Details">
+       <a class="item item-avartar">
+	     <h2>11111111111</h2>
+         <h2>{{event.EventName}}</h2>
+		 <p>Where: {{event.Location.Room}}, {{event.Location.Street}} , {{event.Location.City}}</p>
+         <p>When: {{event.Time.Month}} {{event.Time.Day}} {{event.Time.StartTime}}</p>
+         <p>{{event.Comments.Comments}}</p>
+         <p>Please Contact: {{event.PosterName}}</p>
+       </a>
+
+    </div>
+  </div>
+
+</div>

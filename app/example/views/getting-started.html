@@ -5,17 +5,10 @@
       Welcome Supersonic!
     </super-navbar-title>
   </super-navbar>
-
-
-  <div class="events" ng-repeat="event in events">
-
-     <div class="list">
-       <a class="item item-avartar">
+	 <super-navigate location="example#event-details" data-params-id="{{ event.objectId }}" ng-repeat="event in events">
+       <a class="item item-avartar" href="#/event-details">
          <h2>{{event.EventName}}</h2>
          <p>{{event.Comments.Comments}}</p>
        </a>
-
-    </div>
-  </div>
-
+	   </super-navigate>
 </div>

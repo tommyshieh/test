@@ -1,24 +1,21 @@
-<div class="padding">
+<div class="padding"  ng-controller="get-started">
 
   <super-navbar>
-    <super-navbar-title>
-      Click
+    <super-navbar-title ng-bind="navbarTitle">
+      Welcome Supersonic!
     </super-navbar-title>
-    <super-navbar-button id="add" side="right" location="example#learn-more"> Add Event
-    </super-navbar-button>
   </super-navbar>
 
-  
 
-  <super-navigate view-id="using-the-scanner">
-    <button class="button button-block button-positive icon-left super-wand">Using the AppGyver Scanner</button>
-  </super-navigate>
+  <div class="events" ng-repeat="event in events">
 
-  <super-navigate view-id="learn-more">
-    <button class="button button-block button-positive icon-left super-university">Learn more</button>
-  </super-navigate>
+     <div class="list">
+       <a class="item item-avartar">
+         <h2>{{event.EventName}}</h2>
+         <p>{{event.Comments.Comments}}</p>
+       </a>
 
-    
-
+    </div>
+  </div>
 
 </div>

@@ -8,25 +8,21 @@
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h2 ng-bind="event['Comments']"></h2>
+	
+	<h2><span ng-bind="event['EventName']"></span></h2> 
+	      
+      <p>Why: <span  ng-bind="event['Comments'].Comments"></span></p> 
+       
+       <p>Where: <span ng-bind="event['Location'].Room"></span>,  
+	   <span ng-bind="event['Location'].Street"></span>, 
+	   <span ng-bind="event['Location'].City"></span>, 
+	   <span ng-bind="event['Location'].State"></span>
+	   </p> 
       
+       <p>Contacts: <span ng-bind="event['Comments'].Contact"></span></p> 
       
+       <p>Time: From <span ng-bind="event['Time'].StartTime"></span> to <span ng-bind="event['Time'].EndTime"></span></p> 
       
-       <p>EventName: <span ng-bind="event['EventName']"></span></p> 
-      
-       <p>Location: <span ng-bind="event['Location']"></span></p> 
-      
-       <p>PosterName: <span ng-bind="event['PosterName']"></span></p> 
-      
-       <p>Time: <span ng-bind="event['Time']"></span></p> 
-      
-       <p>createdAt: <span ng-bind="event['createdAt']"></span></p> 
-      
-       <p>objectId: <span ng-bind="event['objectId']"></span></p> 
-      
-       <p>updatedAt: <span ng-bind="event['updatedAt']"></span></p> 
-      
-
 
       <super-modal-show location="event#edit?id={{ event.id }}">
         <button class="button button-block button-positive">

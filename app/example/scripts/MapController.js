@@ -83,7 +83,6 @@ angular
       centerControlDiv.index = 0;
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(centerControlDiv);
     }
-    
     google.maps.event.addDomListener(window, 'load', initialize);
 
     $('#map-canvas').css("height", $(window).height());
@@ -91,12 +90,15 @@ angular
 
     setInterval(function(){
       // set center to current location
-      supersonic.device.geolocation.getPosition().then(function(position)
+      if (map != undefined && myMarker != undefined)
       {
-        var currentLocation = new google.maps.LatLng(position.coords.latitude,
+        supersonic.device.geolocation.getPosition().then(function(position)
+        {
+          var currentLocation = new google.maps.LatLng(position.coords.latitude,
                                                      position.coords.longitude);
-        myMarker.setPosition(currentLocation);
-      });
+          myMarker.setPosition(currentLocation);
+        });
+      }
     }, 1000);
 
 

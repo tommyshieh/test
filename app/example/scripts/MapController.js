@@ -3,13 +3,12 @@ angular
   .controller('MapController', function($scope, supersonic) {
 
     $scope.navbarTitle = "Map";
-    $scope.position = undefined;
 
     
 
     function CenterControl(controlDiv, map) {
 
-      // Set CSS for the control border
+      // Set CSS for the my location button
       var controlUI = document.createElement('div');
       controlUI.style.backgroundColor = '#fff';
       controlUI.style.border = '2px solid #fff';
@@ -22,30 +21,27 @@ angular
       controlUI.title = 'Click to recenter the map';
       controlDiv.appendChild(controlUI);
 
-      // Set CSS for the control interior
+      // Add location icon to button
       var controlText = document.createElement('img');
       controlText.src = "/icons/mylocation.svg";
       controlText.width = $(window).height()/25;
       controlText.height = $(window).height()/25;
       controlUI.appendChild(controlText);
 
-      // Setup the click event listeners: simply set the map to
-      // Chicago
+      // Setup the click event listeners for the my location button
       google.maps.event.addDomListener(controlUI, 'click', function() {
         supersonic.device.geolocation.getPosition().then(function(position)
         {
-          $scope.position = position;
           map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
           map.setZoom(18);
         });
       });
     }
-    
-    var map = undefined;
-    var myMarker = undefined;
+
     function initialize() {
       var mapOptions = {
-        center: { lat: -34, lng: 150},
+        // default location is NU Campus
+        center: { lat: 42.055984, lng: -87.675171},
         zoom: 18,
         zoomControl: true,
         zoomControlOptions: {
@@ -81,29 +77,29 @@ angular
           });
       });
 
-      // Create the DIV to hold the control and
-      // call the CenterControl() constructor passing
-      // in this DIV.
       var centerControlDiv = document.createElement('div');
       var centerControl = new CenterControl(centerControlDiv, map);
 
       centerControlDiv.index = 0;
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(centerControlDiv);
     }
-    
     google.maps.event.addDomListener(window, 'load', initialize);
 
     $('#map-canvas').css("height", $(window).height());
 
+
     setInterval(function(){
       // set center to current location
-      supersonic.device.geolocation.getPosition().then(function(position)
+      if (map != undefined && myMarker != undefined)
       {
-        var currentLocation = new google.maps.LatLng(position.coords.latitude,
+        supersonic.device.geolocation.getPosition().then(function(position)
+        {
+          var currentLocation = new google.maps.LatLng(position.coords.latitude,
                                                      position.coords.longitude);
-        supersonic.logger.log(currentLocation);
-        myMarker.setPosition(currentLocation);
-      });
+          myMarker.setPosition(currentLocation);
+        });
+      }
     }, 1000);
+
 
   });

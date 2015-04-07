@@ -1,0 +1,42 @@
+<div ng-controller="ShowController">
+  <super-navbar>
+    <super-navbar-title>
+      Show
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+      <h2 ng-bind="event['Comments']"></h2>
+      
+      
+      
+       <p>EventName: <span ng-bind="event['EventName']"></span></p> 
+      
+       <p>Location: <span ng-bind="event['Location']"></span></p> 
+      
+       <p>PosterName: <span ng-bind="event['PosterName']"></span></p> 
+      
+       <p>Time: <span ng-bind="event['Time']"></span></p> 
+      
+       <p>createdAt: <span ng-bind="event['createdAt']"></span></p> 
+      
+       <p>objectId: <span ng-bind="event['objectId']"></span></p> 
+      
+       <p>updatedAt: <span ng-bind="event['updatedAt']"></span></p> 
+      
+
+
+      <super-modal-show location="event#edit?id={{ event.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="remove(event.id)" class="button button-block button-negative">
+        Remove
+      </button>
+    </div>
+  </div>
+</div>

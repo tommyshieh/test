@@ -1,20 +1,20 @@
 angular
-  .module('superhero')
-  .controller("EditController", function ($scope, Superhero, supersonic) {
-    $scope.superhero = null;
+  .module('event')
+  .controller("EditController", function ($scope, Event, supersonic) {
+    $scope.event = null;
     $scope.showSpinner = true;
 
     // Fetch an object based on id from the database
-    Superhero.find(steroids.view.params.id).then( function (superhero) {
+    Event.find(steroids.view.params.id).then( function (event) {
       $scope.$apply(function() {
-        $scope.superhero = superhero;
+        $scope.event = event;
         $scope.showSpinner = false;
       });
     });
 
     $scope.submitForm = function() {
       $scope.showSpinner = true;
-      $scope.superhero.save().then( function () {
+      $scope.event.save().then( function () {
         supersonic.ui.modal.hide();
       });
     }

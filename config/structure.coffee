@@ -20,9 +20,9 @@ module.exports =
       location: "example#settings"
     }
     {
-      title: "Superheroes"
-      id: "superheroes"
-      location: "superhero#index"
+      title: "Events"
+      id: "event"
+      location: "event#index"
     }
   ]
 

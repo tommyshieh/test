@@ -1,30 +1,30 @@
 <div ng-controller="IndexController">
   <super-navbar>
     <super-navbar-title>
-      Superhero Index
+      Event Index
     </super-navbar-title>
   </super-navbar>
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
-    <ul class="list" ng-hide="superheros.length == 0">
+    <ul class="list" ng-hide="events.length == 0">
 
-      <super-navigate location="superhero#show" data-params-id="{{ superhero.id }}" ng-repeat="superhero in superheros">
+      <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events">
         <li class="item item-icon-right">
-          <span ng-bind="superhero['alter_ego']"></span>
+          <span ng-bind="event['Comments']"></span>
           <i class="icon super-ios7-arrow-right"></i>
         </li>
       </super-navigate>
 
     </ul>
 
-    <h4 ng-show="superheros.length == 0" class="assertive padding">
-      No superheros found. Create one?
+    <h4 ng-show="events.length == 0" class="assertive padding">
+      No events found. Create one?
     </h4>
 
-    <super-modal-show location="superhero#new">
+    <super-modal-show location="event#new">
       <button class="button button-full button-positive">
-        Create a new superhero
+        Create a new event
       </button>
     </super-modal-show>
   </div>

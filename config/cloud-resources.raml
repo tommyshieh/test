@@ -16,8 +16,8 @@ traits:
           default: 54680
 
 schemas:
-  - superhero_collection: '{"$schema":"http://json-schema.org/schema","title":"superhero collection","type":"object","properties":{"results":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical superhero representation","properties":{"alter_ego":{"type":"string"},"createdAt":{"type":"string"},"name":{"type":"string"},"objectId":{"type":"string"},"publisher":{"type":"string"},"updatedAt":{"type":"string"}},"required":[]}}}}'
-  - superhero_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical superhero representation","properties":{"alter_ego":{"type":"string"},"createdAt":{"type":"string"},"name":{"type":"string"},"objectId":{"type":"string"},"publisher":{"type":"string"},"updatedAt":{"type":"string"}},"required":[]}'
+  - Event_collection: '{"$schema":"http://json-schema.org/schema","title":"Event collection","type":"object","properties":{"results":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Event representation","properties":{"Comments":{"type":"object"},"EventName":{"type":"string"},"Location":{"type":"object"},"PosterName":{"type":"string"},"Time":{"type":"object"},"createdAt":{"type":"string"},"objectId":{"type":"string"},"updatedAt":{"type":"string"}},"required":[]}}}}'
+  - Event_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Event representation","properties":{"Comments":{"type":"object"},"EventName":{"type":"string"},"Location":{"type":"object"},"PosterName":{"type":"string"},"Time":{"type":"object"},"createdAt":{"type":"string"},"objectId":{"type":"string"},"updatedAt":{"type":"string"}},"required":[]}'
 
 resourceTypes:
   - dolan_db_collection:
@@ -165,10 +165,10 @@ resourceTypes:
           200:
 
 
-/superhero:
+/Event:
   description: |
     {
-      "resourceName": "superhero",
+      "resourceName": "Event",
       "identifierKey": "objectId"
     }
   type: parse_collection

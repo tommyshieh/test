@@ -8,17 +8,33 @@
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h2 ng-bind="event['Comments']"></h2>
+      <h2 ng-bind="event['City']"></h2>
       
       
+      
+       <p>Comments: <span ng-bind="event['Comments']"></span></p> 
+      
+       <p>Contact: <span ng-bind="event['Contact']"></span></p> 
+      
+       <p>Day: <span ng-bind="event['Day']"></span></p> 
+      
+       <p>EndTime: <span ng-bind="event['EndTime']"></span></p> 
       
        <p>EventName: <span ng-bind="event['EventName']"></span></p> 
       
-       <p>Location: <span ng-bind="event['Location']"></span></p> 
+       <p>Month: <span ng-bind="event['Month']"></span></p> 
       
        <p>PosterName: <span ng-bind="event['PosterName']"></span></p> 
       
-       <p>Time: <span ng-bind="event['Time']"></span></p> 
+       <p>Room: <span ng-bind="event['Room']"></span></p> 
+      
+       <p>StartTime: <span ng-bind="event['StartTime']"></span></p> 
+      
+       <p>State: <span ng-bind="event['State']"></span></p> 
+      
+       <p>Street: <span ng-bind="event['Street']"></span></p> 
+      
+       <p>Year: <span ng-bind="event['Year']"></span></p> 
       
        <p>createdAt: <span ng-bind="event['createdAt']"></span></p> 
       

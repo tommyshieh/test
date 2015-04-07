@@ -10,8 +10,9 @@
     <ul class="list" ng-hide="events.length == 0">
 
       <super-navigate location="event#show" data-params-id="{{ event.id }}" ng-repeat="event in events">
-        <li class="item item-icon-right">
-          <span ng-bind="event['Comments']"></span>
+        <li class="item item-avartar item-icon-right">
+          <h2 ng-bind="event['Comments'].Comments"></h2>
+          <p ng-bind="event['Comments'].Contact"></p>
           <i class="icon super-ios7-arrow-right"></i>
         </li>
       </super-navigate>

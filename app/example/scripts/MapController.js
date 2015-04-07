@@ -1,5 +1,6 @@
 angular
   .module('example')
+  .constant('Event', supersonic.data.model('Event'))
   .controller('MapController', function($scope, supersonic) {
 
     $scope.navbarTitle = "Map";
@@ -37,7 +38,8 @@ angular
         });
       });
     }
-
+    var map = undefined;
+    var myMarker = undefined;
     function initialize() {
       var mapOptions = {
         // default location is NU Campus
@@ -100,6 +102,15 @@ angular
         });
       }
     }, 1000);
+
+
+    Event.all().whenChanged( function (events) {
+        $scope.$apply( function () {
+          $scope.events = events;
+          $scope.showSpinner = false;
+          console.log("first event is " + allEvents[0].EventName);
+        });
+    });
 
 
   });
